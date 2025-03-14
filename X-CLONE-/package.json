@@ -1,0 +1,33 @@
+{
+  "name": "x-clone-",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "TargetTest": "node --experimental-vm-modules node_modules/jest/bin/jest.js Posts/Tests/postController.test.js",
+    "dev": "node --watch index.js",
+    "coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.1",
+    "node-cache": "^5.1.2",
+    "node-mocks-http": "^1.16.0",
+    "supertest": "^7.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "jest": {
+    "transform": {}
+  }
+}

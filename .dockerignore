@@ -1,0 +1,8 @@
+.dockerignore
+BackEnd.dockerfile
+docker-compose.yml
+X-CLONE-\node_modules
+x-clone-frontend\node_modules
+
+
+
