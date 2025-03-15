@@ -5,7 +5,7 @@ export async function CreatePost(Content, UserUID) {
     if (!Content) throw new Error('Content is empty.');
     if (!UserUID) throw new Error('UserUID is empty.');
     const result = await axios.post(
-      'http://localhost:1234/api/v1/posts',
+      'http://localhost:80/api/v1/posts',
       {
         content: Content,
       },
@@ -28,7 +28,7 @@ export async function GetAllPosts(Token, LastPostID, LastPostCreatedAt) {
   try {
     if (!Token) throw new Error('Token is empty.');
 
-    const result = await axios.get('http://localhost:1234/api/v1/Posts/all', {
+    const result = await axios.get('http://localhost:80/api/v1/Posts/all', {
       headers: {
         authorization: Token,
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export const getPostById = async (token, postUID) => {
     if (!postUID) throw new Error('postUID is empty.');
 
     const result = await axios.get(
-      `http://localhost:1234/api/v1/Posts/${postUID}`,
+      `http://localhost:80/api/v1/Posts/${postUID}`,
       {
         headers: {
           authorization: token,
@@ -77,7 +77,7 @@ export const getPostsCreatedByFollowingUsers = async (
 ) => {
   try {
     const result = await axios.get(
-      'http://localhost:1234/api/v1/posts/following',
+      'http://localhost:80/api/v1/posts/following',
       {
         headers: {
           authorization: token,
@@ -107,7 +107,7 @@ export async function GetPostsCreatedByUserName(
     if (!UserName) throw new Error('User Name is empty.');
 
     const result = await axios.get(
-      `http://localhost:1234/api/v1/Posts/User/${UserName}`,
+      `http://localhost:80/api/v1/Posts/User/${UserName}`,
       {
         headers: {
           authorization: Token,

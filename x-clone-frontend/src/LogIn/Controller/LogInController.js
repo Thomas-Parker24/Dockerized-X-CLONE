@@ -8,7 +8,7 @@ export async function LogInWithUserName(UserName, PassWord) {
     if (!PassWord) throw new Error('PassWord is empty.');
 
     const result = await axios.post(
-      'http://localhost:1234/api/v1/Auth/Session/UserName',
+      'http://localhost:80/api/v1/Auth/Session/UserName',
       {
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export async function LogInWithEmail(Email, PassWord) {
     if (!PassWord) throw new Error('PassWord is empty.');
 
     const result = await axios.post(
-      'http://localhost:1234/api/v1/Auth/Session/Email',
+      'http://localhost:80/api/v1/Auth/Session/Email',
       {
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export async function LogOutUser(UID) {
   try {
     if (!UID) throw new Error('UID is empty.');
 
-    await axios.delete('http://localhost:1234/api/v1/Auth/Session', {
+    await axios.delete('http://localhost:80/api/v1/Auth/Session', {
       headers: {
         authorization: UID,
         'Content-Type': 'application/json',
