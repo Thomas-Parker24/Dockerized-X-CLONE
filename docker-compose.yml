@@ -6,18 +6,24 @@ services:
     build:
       context: .
       dockerfile: BackEnd.dockerfile
+    env_file:
+      - BackEnd.env
 
   backendservice2:
     container_name: apiserver2
     build:
       context: .
       dockerfile: BackEnd.dockerfile
+    env_file:
+      - BackEnd.env
 
   backendservice3:
     container_name: apiserver3
     build:
       context: .
       dockerfile: BackEnd.dockerfile
+    env_file:
+      - BackEnd.env
 
   #endregion
 
@@ -28,18 +34,24 @@ services:
     build:
       context: .
       dockerfile: FrontEnd.dockerfile
+    env_file:
+      - FrontEnd.env
 
   frontendservice2:
     container_name: webappserver2
     build:
       context: .
       dockerfile: FrontEnd.dockerfile
+    env_file:
+      - FrontEnd.env
 
   frontendservice3:
     container_name: webappserver3
     build:
       context: .
       dockerfile: FrontEnd.dockerfile
+    env_file:
+      - FrontEnd.env
 
   #endregion
 
