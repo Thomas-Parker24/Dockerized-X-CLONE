@@ -1,0 +1,63 @@
+services:
+  #region BackEnd
+
+  backendservice1:
+    container_name: apiserver1
+    build:
+      context: .
+      dockerfile: BackEnd.dockerfile
+
+  backendservice2:
+    container_name: apiserver2
+    build:
+      context: .
+      dockerfile: BackEnd.dockerfile
+
+  backendservice3:
+    container_name: apiserver3
+    build:
+      context: .
+      dockerfile: BackEnd.dockerfile
+
+  #endregion
+
+  #region FrontEnd
+
+  frontendservice1:
+    container_name: webappserver1
+    build:
+      context: .
+      dockerfile: FrontEnd.dockerfile
+
+  frontendservice2:
+    container_name: webappserver2
+    build:
+      context: .
+      dockerfile: FrontEnd.dockerfile
+
+  frontendservice3:
+    container_name: webappserver3
+    build:
+      context: .
+      dockerfile: FrontEnd.dockerfile
+
+  #endregion
+
+  #region NGINX
+
+  apigatewayservice:
+    container_name: apigatewayservice
+    build:
+      context: .
+      dockerfile: APIGatewayNginx.dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - backendservice1
+      - backendservice2
+      - backendservice3
+      - frontendservice1
+      - frontendservice2
+      - frontendservice3
+
+  #endregion
