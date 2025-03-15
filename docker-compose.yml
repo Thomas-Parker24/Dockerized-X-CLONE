@@ -61,3 +61,33 @@ services:
       - frontendservice3
 
   #endregion
+
+  #region MongoDB
+
+  databaseservice:
+    container_name: databaseservice
+    build:
+      context: .
+      dockerfile: MongoDBLoadBalancerNginx.dockerfile
+    depends_on:
+      - mongodbservice1
+      # - mongodbservice2
+
+  mongodbservice1:
+    container_name: mongodbservice1
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+
+  # mongodbservice2:
+  #   container_name: mongodbservice2
+  #   image: mongo:latest
+  #   restart: always
+  #   volumes:
+  #     - mongo_data:/data/db
+
+  #endregion
+
+volumes:
+  mongo_data: {}
