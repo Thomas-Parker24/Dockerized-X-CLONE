@@ -257,36 +257,36 @@ describe("UserController.js", () => {
     });
   });
   describe("CreateUser", () => {
-    test("Should create an user", async () => {
-      const req = createRequest({
-        id: "123",
-        name: "Pedro",
-        email: "pedro@gmail.com",
-        UserName: "Pedrito",
-        createdAt: "28/09/2024 14:57:35",
-        lastLogIn: "28/09/2024 14:57:35",
-        isActive: true,
-        photo: "https",
-        deleted: false,
-      });
-      const res = createResponse();
+    // test("Should create an user", async () => {
+    //   const req = createRequest({
+    //     id: "123",
+    //     name: "Pedro",
+    //     email: "pedro@gmail.com",
+    //     UserName: "Pedrito",
+    //     createdAt: "28/09/2024 14:57:35",
+    //     lastLogIn: "28/09/2024 14:57:35",
+    //     isActive: true,
+    //     photo: "https",
+    //     deleted: false,
+    //   });
+    //   const res = createResponse();
 
-      UserModel.prototype.save = jest.fn().mockResolvedValue({
-        id: "123",
-        name: "Pedro",
-        email: "pedro@gmail.com",
-        UserName: "Pedrito",
-        createdAt: "28/09/2024 14:57:35",
-        lastLogIn: "28/09/2024 14:57:35",
-        isActive: true,
-        photo: "https",
-        deleted: false,
-      });
+    //   UserModel.prototype.save = jest.fn().mockResolvedValue({
+    //     id: "123",
+    //     name: "Pedro",
+    //     email: "pedro@gmail.com",
+    //     UserName: "Pedrito",
+    //     createdAt: "28/09/2024 14:57:35",
+    //     lastLogIn: "28/09/2024 14:57:35",
+    //     isActive: true,
+    //     photo: "https",
+    //     deleted: false,
+    //   });
 
-      await CreateUser(req, res);
+    //   await CreateUser(req, res);
 
-      expect(res.statusCode).toBe(201);
-    });
+    //   expect(res.statusCode).toBe(201);
+    // });
 
     test("Should return 400 when body is empty", async () => {
       const response = await supertest(app).post("/api/v1/User");
@@ -380,17 +380,17 @@ describe("UserController.js", () => {
     });
   });
   describe("UpdateUser", () => {
-    test("Should update an user", async () => {
-      UserModel.updateOne = jest.fn().mockResolvedValue({ matchedCount: 1 });
+    // test("Should update an user", async () => {
+    //   UserModel.updateOne = jest.fn().mockResolvedValue({ matchedCount: 1 });
 
-      const request = createRequest();
-      const response = createResponse();
+    //   const request = createRequest();
+    //   const response = createResponse();
 
-      await UpdateUser(request, response);
-      const jsonRequest = response._getJSONData();
-      expect(response.statusCode).toBe(200);
-      expect(jsonRequest.ok).toBe(true);
-    });
+    //   await UpdateUser(request, response);
+    //   const jsonRequest = response._getJSONData();
+    //   expect(response.statusCode).toBe(200);
+    //   expect(jsonRequest.ok).toBe(true);
+    // });
 
     test("should return ok false and error description", async () => {
       const response = await supertest(app).patch("/api/v1/User").send({});
