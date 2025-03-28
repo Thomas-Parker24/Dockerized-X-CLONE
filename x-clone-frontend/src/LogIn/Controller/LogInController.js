@@ -82,7 +82,7 @@ export async function LogInWithEmail(Email, PassWord) {
 
 export async function LogOutUser(UID) {
   try {
-    if (!UID) throw new Error('UID is empty.');
+    if (!UID) throw new Error('UID is empty...');
 
     await axios.delete('http://localhost:80/api/v1/Auth/Session', {
       headers: {
