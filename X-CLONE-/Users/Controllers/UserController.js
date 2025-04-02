@@ -364,7 +364,7 @@ export async function GetFollowedUsersByUserName(request, response) {
   } catch (error) {
     response.status(500).json({
       ok: false,
-      message: "An error ocurred while trying to get followed users",
+      message: "An error ocurred while trying to get followed users..",
       errorDescription: error?.message,
     });
   }
