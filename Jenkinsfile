@@ -31,9 +31,9 @@ pipeline{
       steps{
         script {
             if (isUnix()) {
-               sh 'docker compose down -v'
+               sh 'docker compose down'
             } else {
-                bat 'docker compose down -v'
+                bat 'docker compose down'
             }
         }
       }

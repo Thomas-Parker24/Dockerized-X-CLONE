@@ -181,11 +181,10 @@ export async function GetFollowersByUserName(request, response) {
 
     const { UserName } = request.params;
 
-    const Result = await RedisClient.connect().get(
-      `${UserName}/GetFollowersByUserName`
-    );
+    const Result = await RedisClient.get(`${UserName}/GetFollowersByUserName`);
 
     if (Result) {
+      console.log(Result);
       console.log("From Cached Data.");
       response.status(200).json({
         ok: true,
@@ -218,7 +217,7 @@ export async function GetFollowersByUserName(request, response) {
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
 
-    RedisClient.connect().set(
+    RedisClient.set(
       `${UserName}/GetFollowersByUserName`,
       JSON.stringify(jsonResponse),
       {
@@ -303,7 +302,7 @@ export async function GetFollowedUsersByUserName(request, response) {
 
     const { UserName } = request.params;
 
-    const Result = await RedisClient.connect().get(
+    const Result = await RedisClient.get(
       `${UserName}/GetFollowedUsersByUserName`
     );
 
@@ -344,7 +343,7 @@ export async function GetFollowedUsersByUserName(request, response) {
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
 
-    RedisClient.connect().set(
+    RedisClient.set(
       `${UserName}/GetFollowedUsersByUserName`,
       JSON.stringify(jsonResponse),
       {
