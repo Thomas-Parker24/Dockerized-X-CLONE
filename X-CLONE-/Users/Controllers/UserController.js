@@ -187,7 +187,7 @@ export async function GetFollowersByUserName(request, response) {
       console.log(Result[0]);
       console.log("From Cached Data.");
 
-      const RedisJSONResult = JSON.parse(Result[0]);
+      const RedisJSONResult = JSON.parse(Result);
       console.log("RedisJSONResult ", RedisJSONResult);
 
       response.status(200).json({
@@ -314,7 +314,7 @@ export async function GetFollowedUsersByUserName(request, response) {
       console.log(Result);
       console.log("From Cached Data.");
 
-      const RedisJSONResult = JSON.parse(Result[0]);
+      const RedisJSONResult = JSON.parse(Result);
       console.log("RedisJSONResult", RedisJSONResult);
 
       response.status(200).json({
@@ -368,6 +368,7 @@ export async function GetFollowedUsersByUserName(request, response) {
       },
     });
   } catch (error) {
+    console.log(error);
     response.status(500).json({
       ok: false,
       message: "An error ocurred while trying to get followed users..",
