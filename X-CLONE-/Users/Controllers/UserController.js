@@ -189,8 +189,8 @@ export async function GetFollowersByUserName(request, response) {
       response.status(200).json({
         ok: true,
         data: {
-          followers: JSON.parse(Result),
-          lenght: JSON.parse(Result).length ?? 0,
+          followers: JSON.parse(Result[0]),
+          lenght: JSON.parse(Result[0]).length ?? 0,
         },
       });
       return;
@@ -312,8 +312,8 @@ export async function GetFollowedUsersByUserName(request, response) {
       response.status(200).json({
         ok: true,
         data: {
-          followers: JSON.parse(Result),
-          lenght: JSON.parse(Result).length ?? 0,
+          followers: JSON.parse(Result[0]),
+          lenght: JSON.parse(Result[0]).length ?? 0,
         },
       });
       return;
