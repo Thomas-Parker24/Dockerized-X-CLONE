@@ -21,7 +21,7 @@ export async function ConnectToDataBase() {
   }
 }
 
-const RedisClient = createClient({
+export const RedisClient = createClient({
   socket: {
     host: process.env.RedisHostName,
     port: process.env.RedisHostPort,
