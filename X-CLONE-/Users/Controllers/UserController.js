@@ -184,13 +184,17 @@ export async function GetFollowersByUserName(request, response) {
     const Result = await RedisClient.get(`${UserName}/GetFollowersByUserName`);
 
     if (Result) {
-      console.log(Result);
+      console.log(Result[0]);
       console.log("From Cached Data.");
+
+      const RedisJSONResult = JSON.parse(Result[0]);
+      console.log("RedisJSONResult ", RedisJSONResult);
+
       response.status(200).json({
         ok: true,
         data: {
-          followers: JSON.parse(Result[0]),
-          lenght: JSON.parse(Result[0]).length ?? 0,
+          followers: RedisJSONResult,
+          lenght: RedisJSONResult.length ?? 0,
         },
       });
       return;
@@ -309,11 +313,15 @@ export async function GetFollowedUsersByUserName(request, response) {
     if (Result && Result != []) {
       console.log(Result);
       console.log("From Cached Data.");
+
+      const RedisJSONResult = JSON.parse(Result[0]);
+      console.log("RedisJSONResult", RedisJSONResult);
+
       response.status(200).json({
         ok: true,
         data: {
-          followers: JSON.parse(Result[0]),
-          lenght: JSON.parse(Result[0]).length ?? 0,
+          followed: RedisJSONResult,
+          lenght: RedisJSONResult.length ?? 0,
         },
       });
       return;
