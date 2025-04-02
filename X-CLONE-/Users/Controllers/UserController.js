@@ -8,8 +8,6 @@ import { UserModel } from "../Models/index.js";
 import { RedisClient } from "../../Database/Controller/index.js";
 import { json } from "express";
 
-const RedisClientConnected = await RedisClient.connect();
-
 export async function GetFollowedUsersIDByUID(userIUD) {
   try {
     if (!userIUD) throw new Error("UserIUD is invalid.");
@@ -183,7 +181,7 @@ export async function GetFollowersByUserName(request, response) {
 
     const { UserName } = request.params;
 
-    const Result = await RedisClientConnected.get(
+    const Result = await RedisClient.connect().get(
       `${UserName}/GetFollowersByUserName`
     );
 
@@ -192,8 +190,8 @@ export async function GetFollowersByUserName(request, response) {
       response.status(200).json({
         ok: true,
         data: {
-          followers: Result,
-          lenght: Result.length,
+          followers: JSON.parse(Result),
+          lenght: JSON.parse(Result).length ?? 0,
         },
       });
       return;
@@ -220,7 +218,7 @@ export async function GetFollowersByUserName(request, response) {
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
 
-    RedisClientConnected.set(
+    RedisClient.connect().set(
       `${UserName}/GetFollowersByUserName`,
       JSON.stringify(jsonResponse),
       {
@@ -305,17 +303,18 @@ export async function GetFollowedUsersByUserName(request, response) {
 
     const { UserName } = request.params;
 
-    const Result = await RedisClientConnected.get(
+    const Result = await RedisClient.connect().get(
       `${UserName}/GetFollowedUsersByUserName`
     );
 
-    if (Result) {
+    if (Result && Result != []) {
+      console.log(Result);
       console.log("From Cached Data.");
       response.status(200).json({
         ok: true,
         data: {
-          followers: Result,
-          lenght: Result.length,
+          followers: JSON.parse(Result),
+          lenght: JSON.parse(Result).length ?? 0,
         },
       });
       return;
@@ -345,7 +344,7 @@ export async function GetFollowedUsersByUserName(request, response) {
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
 
-    RedisClientConnected.set(
+    RedisClient.connect().set(
       `${UserName}/GetFollowedUsersByUserName`,
       JSON.stringify(jsonResponse),
       {

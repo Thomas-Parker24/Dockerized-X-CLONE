@@ -16,8 +16,19 @@ import {
   GetFollowedUsersByUID,
   GetFollowedUsersIDByUID,
 } from "../Controllers/UserController.js";
+import redis from "redis";
 
 jest.mock("../../Users/Models/UserModel.js");
+
+jest.mock("redis", () => ({
+  connect: jest.fn().mockResolvedValue(),
+  createClient: jest.fn(() => ({
+    connect: jest.fn().mockResolvedValue(),
+    get: jest.fn().mockResolvedValue(null),
+    set: jest.fn().mockResolvedValue("OK"),
+    on: jest.fn(),
+  })),
+}));
 
 describe("UserController.js", () => {
   describe("Get Followed UsersID By UID", () => {
