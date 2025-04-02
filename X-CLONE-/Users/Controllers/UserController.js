@@ -5,6 +5,10 @@ import {
   EncryptPassWord,
 } from "../../Utils/Functions/index.js";
 import { UserModel } from "../Models/index.js";
+import { RedisClient } from "../../Database/Controller/index.js";
+import { json } from "express";
+
+const RedisClientConnected = await RedisClient.connect();
 
 export async function GetFollowedUsersIDByUID(userIUD) {
   try {
@@ -179,6 +183,22 @@ export async function GetFollowersByUserName(request, response) {
 
     const { UserName } = request.params;
 
+    const Result = await RedisClientConnected.get(
+      `${UserName}/GetFollowersByUserName`
+    );
+
+    if (Result) {
+      console.log("From Cached Data.");
+      response.status(200).json({
+        ok: true,
+        data: {
+          followers: Result,
+          lenght: Result.length,
+        },
+      });
+      return;
+    }
+
     const user = await UserModel.findOne({ userName: UserName }).exec();
 
     if (!user || user.length === 0) throw new Error("User not found.");
@@ -199,6 +219,16 @@ export async function GetFollowersByUserName(request, response) {
     }));
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
+
+    RedisClientConnected.set(
+      `${UserName}/GetFollowersByUserName`,
+      JSON.stringify(jsonResponse),
+      {
+        EX: 30,
+        NX: true,
+      }
+    );
+
     response.status(200).json({
       ok: true,
       data: {
@@ -275,6 +305,22 @@ export async function GetFollowedUsersByUserName(request, response) {
 
     const { UserName } = request.params;
 
+    const Result = await RedisClientConnected.get(
+      `${UserName}/GetFollowedUsersByUserName`
+    );
+
+    if (Result) {
+      console.log("From Cached Data.");
+      response.status(200).json({
+        ok: true,
+        data: {
+          followers: Result,
+          lenght: Result.length,
+        },
+      });
+      return;
+    }
+
     const user = await UserModel.findOne(
       { userName: UserName },
       "followed"
@@ -298,6 +344,16 @@ export async function GetFollowedUsersByUserName(request, response) {
     }));
 
     jsonResponse.sort((a, b) => a.name.localeCompare(b.name));
+
+    RedisClientConnected.set(
+      `${UserName}/GetFollowedUsersByUserName`,
+      JSON.stringify(jsonResponse),
+      {
+        EX: 30,
+        NX: true,
+      }
+    );
+
     response.status(200).json({
       ok: true,
       data: {

@@ -85,5 +85,16 @@ services:
 
   #endregion
 
+  #region Redis
+
+  RedisService:
+    container_name: RedisService
+    image: redis:latest
+    restart: always
+    volumes: -redis_data:/data/db
+
+  #endregion
+
 volumes:
   mongo_data: {}
+  reid_data: {}
