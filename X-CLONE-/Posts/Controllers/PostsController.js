@@ -97,7 +97,7 @@ export async function getAllPosts(req, res) {
   } catch (error) {
     res.status(500).json({
       ok: false,
-      message: "An error ocurred while trying to get posts",
+      message: "An error ocurred while trying to get posts...",
       errorDescription: error?.message,
     });
   }

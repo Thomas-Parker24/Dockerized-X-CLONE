@@ -38,7 +38,7 @@ export const LogInComponent = () => {
         <div className="md:w-1/3 w-full px-4">
           <div className="w-full text-center md:text-left">
             <h3 className="font-extrabold text-white text-5xl">
-              Happening now
+              Happening yesterday
             </h3>
             <p className="mt-8 font-extrabold text-white text-2xl">
               Join today.
