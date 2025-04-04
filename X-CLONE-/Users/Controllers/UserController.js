@@ -199,7 +199,7 @@ export async function GetFollowersByUserName(request, response) {
 
     const user = await UserModel.findOne({ userName: UserName }).exec();
 
-    if (!user || user.length === 0) throw new Error("User not found.");
+    if (!user || user.length === 0) throw new Error("User not found...");
 
     const followerUsers = await UserModel.find({
       _id: { $in: user.followers },
