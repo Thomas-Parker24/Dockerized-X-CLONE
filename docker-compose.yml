@@ -1,6 +1,7 @@
-services:
-  #region BackEnd
+version: "3.8"
 
+services:
+  # BackEnd
   backendservice1:
     container_name: apiserver1
     build:
@@ -25,10 +26,7 @@ services:
     env_file:
       - BackEnd.env
 
-  #endregion
-
-  #region FrontEnd
-
+  # FrontEnd
   frontendservice1:
     container_name: webappserver1
     build:
@@ -53,17 +51,14 @@ services:
     env_file:
       - FrontEnd.env
 
-  #endregion
-
-  #region NGINX
-
+  # NGINX
   apigatewayservice:
     container_name: apigatewayservice
     build:
       context: .
       dockerfile: APIGatewayNginx.dockerfile
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - backendservice1
       - backendservice2
@@ -72,10 +67,7 @@ services:
       - frontendservice2
       - frontendservice3
 
-  #endregion
-
-  #region MongoDB
-
+  # MongoDB
   mongodbservice:
     container_name: mongodbservice1
     image: mongo:latest
@@ -83,18 +75,13 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  #endregion
-
-  #region Redis
-
-  RedisService:
+  # Redis
+  redisservice:
     container_name: RedisService
     image: redis:latest
     restart: always
     volumes:
       - redis_data:/data/db
-
-  #endregion
 
 volumes:
   mongo_data: {}
