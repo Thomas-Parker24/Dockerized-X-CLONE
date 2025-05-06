@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { APIURI } from '../../Common/Constants';
 
 export async function CreateUser(userData) {
   try {
@@ -9,7 +10,7 @@ export async function CreateUser(userData) {
     if (!userData.Description) throw new Error('Description is empty.');
     if (!userData.PhotoURL) throw new Error('Photo is empty');
 
-    const result = await axios.post('http://localhost:80/api/v1/User', {
+    const result = await axios.post(`${APIURI}/api/v1/User`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -33,7 +34,7 @@ export async function GetUserDataByUID(UserUID) {
   try {
     if (!UserUID) throw new Error('UserUID is empty.');
 
-    const result = await axios.get('http://localhost:80/api/v1/User', {
+    const result = await axios.get(`${APIURI}/api/v1/User`, {
       headers: {
         authorization: UserUID,
         'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ export const getUserByUserName = async (userUID, userName) => {
     if (!userName) throw new Error('userName is empty.');
 
     const result = await axios.get(
-      `http://localhost:80/api/v1/User/userName/${userName}`,
+      `${APIURI}/api/v1/User/userName/${userName}`,
       {
         headers: {
           authorization: userUID,
@@ -75,7 +76,7 @@ export async function GetFollowers(Token, UserName) {
     if (!UserName) throw new Error('User Name is empty.');
 
     const result = await axios.get(
-      `http://localhost:80/api/v1/User/Followers/${UserName}`,
+      `${APIURI}/api/v1/User/Followers/${UserName}`,
       {
         headers: {
           authorization: Token,
@@ -97,7 +98,7 @@ export async function GetFollowed(Token, TargetUserName) {
     if (!TargetUserName) throw new Error('UserName is empty.');
 
     const result = await axios.get(
-      `http://localhost:80/api/v1/User/Followed/${TargetUserName}`,
+      `${APIURI}/api/v1/User/Followed/${TargetUserName}`,
       {
         headers: {
           authorization: Token,
@@ -119,7 +120,7 @@ export async function FollowUser(Token, FollowedID) {
     if (!FollowedID) throw new Error('FollowedID is empty.');
 
     await axios.post(
-      'http://localhost:80/api/v1/User/Follow',
+      `${APIURI}/api/v1/User/Follow`,
       {
         followedUid: FollowedID,
       },
@@ -144,7 +145,7 @@ export async function UnfollowUser(Token, FollowerUID) {
     if (!FollowerUID) throw new Error('FollowerUID is empty.');
 
     await axios.post(
-      'http://localhost:80/api/v1/User/UnFollow',
+      `${APIURI}/api/v1/User/UnFollow`,
       {
         followedUid: FollowerUID,
       },

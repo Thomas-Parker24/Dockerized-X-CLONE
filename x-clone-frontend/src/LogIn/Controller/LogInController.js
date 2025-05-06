@@ -1,22 +1,20 @@
 import axios from 'axios';
 import { getEnvironments } from '../../Common/Functions';
 const { API_URL } = getEnvironments();
+import { APIURI } from '../../Common/Constants';
 
 export async function LogInWithUserName(UserName, PassWord) {
   try {
     if (!UserName) throw new Error('UserName is empty.');
     if (!PassWord) throw new Error('PassWord is empty.');
 
-    const result = await axios.post(
-      'http://localhost:80/api/v1/Auth/Session/UserName',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        UserName: UserName,
-        passWord: PassWord,
-      }
-    );
+    const result = await axios.post(`${APIURI}/api/v1/Auth/Session/UserName`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      UserName: UserName,
+      passWord: PassWord,
+    });
 
     return {
       ok: true,
@@ -46,16 +44,13 @@ export async function LogInWithEmail(Email, PassWord) {
     if (!Email) throw new Error('Email is empty.');
     if (!PassWord) throw new Error('PassWord is empty.');
 
-    const result = await axios.post(
-      'http://localhost:80/api/v1/Auth/Session/Email',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        email: Email,
-        passWord: PassWord,
-      }
-    );
+    const result = await axios.post(`${APIURI}/api/v1/Auth/Session/Email`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      email: Email,
+      passWord: PassWord,
+    });
 
     return {
       ok: true,
@@ -84,7 +79,7 @@ export async function LogOutUser(UID) {
   try {
     if (!UID) throw new Error('UID is empty...');
 
-    await axios.delete('http://localhost:80/api/v1/Auth/Session', {
+    await axios.delete(`${APIURI}/api/v1/Auth/Session`, {
       headers: {
         authorization: UID,
         'Content-Type': 'application/json',
