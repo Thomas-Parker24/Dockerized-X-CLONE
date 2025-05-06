@@ -104,7 +104,7 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     public_key = tls_private_key.ssh_key.public_key_openssh
   }
 
-  custom_data = filebase64("${path.module}/VMinit.yml")
+  custom_data = filebase64("${path.module}/VMInit.yml")
 
   os_disk {
     caching              = "ReadWrite"
