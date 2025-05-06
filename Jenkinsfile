@@ -33,6 +33,7 @@ pipeline {
         script {
           if (isUnix()) {
             sh '''
+              ls -la
               terraform init
               terraform plan -out=tfplan
               terraform apply -auto-approve tfplan
