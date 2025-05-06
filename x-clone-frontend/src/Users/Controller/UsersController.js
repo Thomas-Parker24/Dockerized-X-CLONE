@@ -10,6 +10,9 @@ export async function CreateUser(userData) {
     if (!userData.Description) throw new Error('Description is empty.');
     if (!userData.PhotoURL) throw new Error('Photo is empty');
 
+    console.log('APIRUI');
+    console.log(APIURI);
+
     const result = await axios.post(`${APIURI}/api/v1/User`, {
       headers: {
         'Content-Type': 'application/json',
