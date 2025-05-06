@@ -12,8 +12,9 @@ export async function CreateUser(userData) {
 
     console.log('APIRUI');
     console.log(APIURI);
+    console.log('http://40.76.122.109:80');
 
-    const result = await axios.post(`${APIURI}/api/v1/User`, {
+    const result = await axios.post('http://40.76.122.109:80/api/v1/User', {
       headers: {
         'Content-Type': 'application/json',
       },
