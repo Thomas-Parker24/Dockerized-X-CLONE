@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  
+  environment {
+    ARM_SUBSCRIPTION_ID  = "6a85bb25-6ff1-44ee-ac00-67c96236e70d"
+    ARM_TENANT_ID        = "ca3f1d6b-fd1f-40b1-b41a-488b980e9f7f"
+  }
 
   stages {
     stage ('Install dependencies') {
