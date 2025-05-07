@@ -1,1 +1,1 @@
-export const APIURI = 'http://40.76.122.109:80';
+export const APIURI = 'http://172.171.91.141:80';
