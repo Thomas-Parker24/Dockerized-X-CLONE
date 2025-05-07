@@ -1,8 +1,11 @@
 provider "azurerm" {
   features {}
   subscription_id = "6a85bb25-6ff1-44ee-ac00-67c96236e70d"
-  tenant_id = "ca3f1d6b-fd1f-40b1-b41a-488b980e9f7f"
+  tenant_id       = "ca3f1d6b-fd1f-40b1-b41a-488b980e9f7f"
 }
+
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/6a85bb25-6ff1-44ee-ac00-67c96236e70d"
+
 
 resource "azurerm_resource_group" "rg" {
   name     = "rg-linux-vm"
@@ -51,15 +54,24 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "allow-8080"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8080"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
-resource "azurerm_public_ip" "public_ip" {
-  name                = "public-ip-linux"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-  zones               = ["1"]
+# Referencia a IP Pública creada manualmente (fuera del control de Terraform)
+data "azurerm_public_ip" "manual_public_ip" {
+  name                = "x_clone_public_ip"
+  resource_group_name = "Main_VM_RS"
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -71,7 +83,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "ipconfig1"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
+    public_ip_address_id          = data.azurerm_public_ip.manual_public_ip.id
   }
 }
 
