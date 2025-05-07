@@ -13,24 +13,18 @@ export async function CreateUser(userData) {
     console.log('APIRUI');
     console.log(APIURI);
 
-    const result = await axios.post(
-      `${APIURI}/api/v1/User`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-        Name: userData.Name,
-        UserName: userData.UserName,
-        Email: userData.Email,
-        PassWord: userData.PassWord,
-        Description: userData.Description,
-        Photo: userData.PhotoURL,
+    const result = await axios.post(`${APIURI}/api/v1/User`, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        withCredentials: true,
-      }
-    );
+
+      Name: userData.Name,
+      UserName: userData.UserName,
+      Email: userData.Email,
+      PassWord: userData.PassWord,
+      Description: userData.Description,
+      Photo: userData.PhotoURL,
+    });
 
     return { ok: true, Token: result.data?.AccessToken };
   } catch (error) {

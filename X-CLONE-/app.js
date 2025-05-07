@@ -9,17 +9,9 @@ import Cache from "node-cache";
 
 export const NodeCache = new Cache();
 export const app = express();
-app.use(
-  cors({
-    origin: "http://xclone.eastus.cloudapp.azure.com",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 
-app.options("*", cors());
 app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/v1", userRouter);
 app.use("/api/v1", logInRouter);
