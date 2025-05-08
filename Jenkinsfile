@@ -34,13 +34,13 @@ pipeline {
           if (isUnix()) {
             sh '''
               ls -la
-              terraform init
-              terraform destroy -auto-approve
+              C:\Terraform\terraform.exe init
+              C:\Terraform\terraform.exe destroy -auto-approve
             '''
           } else {
             bat '''
-              terraform init
-              terraform destroy -auto-approve
+              C:\Terraform\terraform.exe init
+              C:\Terraform\terraform.exe destroy -auto-approve
             '''
           }
         }
