@@ -28,7 +28,20 @@ pipeline {
       }
     }
 
-    stage('Shutting Off Infraestructure') {
+    stage('Login to Azure') {
+      steps {
+        script {
+          echo 'Please login to Azure interactively...'
+          if (isUnix()) {
+            sh 'az login' // Este comando abrirá una ventana para iniciar sesión
+          } else {
+            bat 'az login' // Lo mismo en Windows
+          }
+        }
+      }
+    }
+
+    stage('Shutting Off Infrastructure') {
       steps {
         script {
           if (isUnix()) {
@@ -47,7 +60,7 @@ pipeline {
       }
     }
 
-    stage('Turning On Infraestructure') {
+    stage('Turning On Infrastructure') {
       steps {
         script {
           if (isUnix()) {
