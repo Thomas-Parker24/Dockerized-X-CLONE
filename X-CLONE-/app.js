@@ -11,7 +11,10 @@ export const NodeCache = new Cache();
 export const app = express();
 app.use(
   cors({
-    origin: "http://172.171.91.141",
+    origin: [
+      "http://xclone.eastus.cloudapp.azure.com",
+      "http://172.171.91.141",
+    ],
   })
 );
 app.use(express.json());
