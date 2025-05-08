@@ -34,13 +34,13 @@ pipeline {
           if (isUnix()) {
             sh '''
               ls -la
-              C:\Terraform\terraform.exe init
-              C:\Terraform\terraform.exe destroy -auto-approve
+              C:\\Terraform\\terraform.exe init
+              C:\\Terraform\\terraform.exe destroy -auto-approve
             '''
           } else {
             bat '''
-              C:\Terraform\terraform.exe init
-              C:\Terraform\terraform.exe destroy -auto-approve
+              C:\\Terraform\\terraform.exe init
+              C:\\Terraform\\terraform.exe destroy -auto-approve
             '''
           }
         }
@@ -53,15 +53,15 @@ pipeline {
           if (isUnix()) {
             sh '''
               ls -la
-              terraform init
-              terraform plan -out=tfplan
-              terraform apply -auto-approve tfplan
+              C:\\Terraform\\terraform.exe init
+              C:\\Terraform\\terraform.exe plan -out=tfplan
+              C:\\Terraform\\terraform.exe apply -auto-approve tfplan
             '''
           } else {
             bat '''
-              terraform init
-              terraform plan -out=tfplan
-              terraform apply -auto-approve tfplan
+              C:\\Terraform\\terraform.exe init
+              C:\\Terraform\\terraform.exe plan -out=tfplan
+              C:\\Terraform\\terraform.exe apply -auto-approve tfplan
             '''
           }
         }
