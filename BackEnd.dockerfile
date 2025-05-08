@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:20-alpine
 WORKDIR /X-CLONE-
 COPY ./X-CLONE- .
 RUN npm install
